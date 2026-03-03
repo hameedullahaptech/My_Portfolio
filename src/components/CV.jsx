@@ -345,8 +345,8 @@ const CV = ({ onClose }) => {
 
     return (
         <motion.div
-            className="fixed inset-0 z-[9999] flex items-start justify-center bg-black/80 backdrop-blur-sm"
-            style={{ overflowY: 'auto', paddingTop: '2rem', paddingBottom: '2rem' }}
+            className="fixed inset-0 z-[99999] flex items-start justify-center bg-black/85 backdrop-blur-md"
+            style={{ overflowY: 'auto', paddingTop: '10px' }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

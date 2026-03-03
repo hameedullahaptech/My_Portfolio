@@ -16,23 +16,25 @@ function App() {
   const [showHire, setShowHire] = useState(false);
 
   return (
-    <Layout onOpenHire={() => setShowHire(true)}>
-      <Hero
-        onOpenCV={() => setShowCV(true)}
-        onOpenHire={() => setShowHire(true)}
-      />
-      <Stats />
-      <About />
-      <Skills />
-      <Projects />
-      <Services />
-      <Contact />
+    <>
+      <Layout onOpenHire={() => setShowHire(true)}>
+        <Hero
+          onOpenCV={() => setShowCV(true)}
+          onOpenHire={() => setShowHire(true)}
+        />
+        <Stats />
+        <About />
+        <Skills />
+        <Projects />
+        <Services />
+        <Contact />
+      </Layout>
 
       <AnimatePresence>
         {showCV && <CV onClose={() => setShowCV(false)} />}
         {showHire && <HireModal isOpen={showHire} onClose={() => setShowHire(false)} />}
       </AnimatePresence>
-    </Layout>
+    </>
   );
 }
 
