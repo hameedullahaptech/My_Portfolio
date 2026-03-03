@@ -1,7 +1,7 @@
 import {
   Github,
   Linkedin,
-  Twitter,
+  MessageCircle,
   Mail,
   Globe,
   Layout,
@@ -36,7 +36,7 @@ export const navLinks = [
 export const socialLinks = [
   { name: "GitHub", href: "https://github.com", icon: Github },
   { name: "LinkedIn", href: "https://www.linkedin.com/in/hameed-ullah-3b4a13343", icon: Linkedin },
-  { name: "Twitter", href: "https://twitter.com", icon: Twitter },
+  { name: "WhatsApp", href: "https://wa.me/923178172876", icon: MessageCircle },
   { name: "Email", href: "https://hameedullahaptech@gmail.com", icon: Mail },
 ];
 
@@ -61,7 +61,7 @@ export const projects = [
     title: "E-Commerce Web Application",
     description: "An E-Commerce Web Application is a complete online shopping platform that allows users to browse products, add items to the cart, and securely place orders. Through the admin panel, products, categories, pricing, and customer orders are efficiently managed.\n\nThe system features a modern user interface, secure checkout process, and order tracking, providing users with a smooth, reliable, and scalable online shopping experience.",
     image: project3,
-    tags: ["React.js", "Bootstrap", "SQL", "Node.js"],
+    tags: ["React.js", "Bootstrap", "SQL", "Asp.Net"],
     liveUrl: "http://ecommercehameed.runasp.net/",
     githubUrl: "https://github.com/hameedullahaptech/Ecommerce.git"
   },
@@ -69,7 +69,7 @@ export const projects = [
     title: "Online Post Office Management  System",
     description: "The Online Post Office Management System is a web-based application designed to digitize traditional post office operations. Through this system, admins can manage deliveries, employees, charges, and locations, while users can book parcels, track shipments, and view delivery charges.\n\nThe project features role-based dashboards, real-time tracking, and automated charge calculation, making it an efficient solution for solving real-world logistics and postal management challenges.",
     image: project4,
-    tags: ["React.js", "Bootstrap", "SQL", "Node.js"],
+    tags: ["React.js", "Bootstrap", "SQL", "Asp.Net"],
     liveUrl: "http://hameedofficemanagement.runasp.net/",
     githubUrl: "https://github.com/hameedullahaptech/Online-Post-Office-Management-System.git"
   },
@@ -168,7 +168,7 @@ export const contactData = {
   heading: "Let's Work Together",
   description: "Have a project in mind or just want to say hi? I'm always open to discussing new projects, creative ideas or opportunities to be part of your visions.",
   email: "hameedullahaptech.com",
-  phone: "031782876",
+  phone: "03178172876",
   location: "Karachi",
   formLabels: {
     name: "Name",
