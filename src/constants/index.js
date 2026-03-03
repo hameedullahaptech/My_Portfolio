@@ -19,6 +19,10 @@ import {
 
 import heroImage from '../assets/hero-image.jpg';
 import aboutImage from '../assets/about-image.jpg';
+import project1 from '../assets/image3.png';
+import project2 from '../assets/image.png';
+import project3 from '../assets/image1.png';
+import project4 from '../assets/image2.png';
 
 export const navLinks = [
   { name: "Home", href: "#home" },
@@ -40,7 +44,7 @@ export const projects = [
   {
     title: "Hotel Management System",
     description: "The Hotel Management System is a web-based application designed to streamline and automate hotel operations. The system allows admins to manage rooms, reservations, customers, staff, and services, while providing users with an easy way to search rooms, make bookings, and view reservation details.\n\nThe project includes role-based access, real-time room availability, booking management, and secure data handling, ensuring efficient hotel administration and a smooth user experience. This system helps reduce manual work and improves overall operational efficiency in the hospitality industry.",
-    image: "src/assets/image3.png",
+    image: project1,
     tags: ["React", "Tailwind", "Recharts", "Node.js"],
     liveUrl: "https://frontend-seven-roan-54.vercel.app/",
     githubUrl: "https://github.com/hameedullahaptech/Hotel_Management_Project.git"
@@ -48,7 +52,7 @@ export const projects = [
   {
     title: "Fitness Tracker",
     description: "A responsive Fitness Tracker Website designed to help users monitor their daily health activities. The system allows users to log meals, track calories, manage workout routines, and view progress in a simple and user-friendly interface. Built with a modern UI, secure authentication, and database integration, the website ensures smooth performance across all devices.\n\nKey Features:\n• User registration & login\n• Meal and calorie tracking\n• Workout & activity logging\n• Responsive design\n• Secure database-driven system",
-    image: "src/assets/image.png",
+    image: project2,
     tags: ["React.js", "Tailwind", ".MongoDB", "Next.js"],
     liveUrl: "https://fitness-hameed.vercel.app/",
     githubUrl: "https://github.com/hameedullahaptech/Fitness-Tracking.git"
@@ -56,7 +60,7 @@ export const projects = [
   {
     title: "E-Commerce Web Application",
     description: "An E-Commerce Web Application is a complete online shopping platform that allows users to browse products, add items to the cart, and securely place orders. Through the admin panel, products, categories, pricing, and customer orders are efficiently managed.\n\nThe system features a modern user interface, secure checkout process, and order tracking, providing users with a smooth, reliable, and scalable online shopping experience.",
-    image: "src/assets/image1.png",
+    image: project3,
     tags: ["React.js", "Bootstrap", "SQL", "Node.js"],
     liveUrl: "http://ecommercehameed.runasp.net/",
     githubUrl: "https://github.com/hameedullahaptech/Ecommerce.git"
@@ -64,7 +68,7 @@ export const projects = [
   {
     title: "Online Post Office Management  System",
     description: "The Online Post Office Management System is a web-based application designed to digitize traditional post office operations. Through this system, admins can manage deliveries, employees, charges, and locations, while users can book parcels, track shipments, and view delivery charges.\n\nThe project features role-based dashboards, real-time tracking, and automated charge calculation, making it an efficient solution for solving real-world logistics and postal management challenges.",
-    image: "src/assets/image2.png",
+    image: project4,
     tags: ["React.js", "Bootstrap", "SQL", "Node.js"],
     liveUrl: "http://hameedofficemanagement.runasp.net/",
     githubUrl: "https://github.com/hameedullahaptech/Online-Post-Office-Management-System.git"
@@ -114,7 +118,7 @@ export const skillCategories = [
   {
     title: "Backend",
     icon: Server,
-    skills: ["Node.js", "Express", "Python", "MongoDB", "REST APIs"]
+    skills: ["Node.js", ".NET", "Python", "REST APIs"]
   },
   {
     title: "Database",
