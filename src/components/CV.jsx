@@ -292,11 +292,7 @@ const CV = ({ onClose }) => {
         const cvEl = document.getElementById('cv-print-area');
         if (!cvEl) return;
 
-        // Temporarily hide buttons inside cv before printing
-        const noprint = cvEl.querySelectorAll('.no-print');
-        noprint.forEach(el => { el.style.display = 'none'; });
-
-        // Collect styles from the page
+        // Collect current styles
         const styleLinks = Array.from(document.querySelectorAll('link[rel="stylesheet"]'))
             .map(link => `<link rel="stylesheet" href="${link.href}">`)
             .join('');
@@ -304,11 +300,9 @@ const CV = ({ onClose }) => {
             .map(s => `<style>${s.innerHTML}</style>`)
             .join('');
 
-        // Build a NEW window (not iframe) so browser print bar stays in that window
-        const printWindow = window.open('', '_blank', 'width=900,height=700,scrollbars=yes,resizable=yes');
+        const printWindow = window.open('', '_blank', 'width=1000,height=800');
         if (!printWindow) {
-            // Fallback: restore buttons if popup blocked
-            noprint.forEach(el => { el.style.display = ''; });
+            alert("Please allow popups to download the CV.");
             return;
         }
 
@@ -317,31 +311,65 @@ const CV = ({ onClose }) => {
             <html>
             <head>
                 <meta charset="UTF-8"/>
-                <title>Hameed Ullah — CV</title>
+                <title>${cvData.name} — CV</title>
                 ${styleLinks}
                 ${inlineStyles}
                 <style>
-                    @page { margin: 0; size: A4; }
-                    body { margin: 0; padding: 0; background: white; }
-                    * { -webkit-print-color-adjust: exact !important; color-adjust: exact !important; }
+                    /* Force Print Settings */
+                    @page { 
+                        size: A4; 
+                        margin: 0; 
+                    }
+                    body { 
+                        margin: 0; 
+                        padding: 0; 
+                        background: white !important;
+                        -webkit-print-color-adjust: exact !important; 
+                        print-color-adjust: exact !important;
+                    }
+                    #cv-print-area { 
+                        width: 210mm !important; 
+                        margin: 0 auto !important;
+                        box-shadow: none !important;
+                        transform: none !important;
+                        display: block !important;
+                    }
                     .no-print { display: none !important; }
+                    
+                    /* Typography & Colors */
+                    * { 
+                        -webkit-print-color-adjust: exact !important; 
+                        print-color-adjust: exact !important; 
+                    }
                 </style>
             </head>
-            <body>${cvEl.outerHTML}</body>
+            <body>
+                <div id="cv-outer-wrapper">
+                    ${cvEl.innerHTML}
+                </div>
+            </body>
+            <script>
+                // Map the original ID to the wrapper if needed, but innerHTML is safer for clones
+                document.body.firstElementChild.id = "cv-print-area";
+                document.body.firstElementChild.className = "${cvEl.className}";
+            </script>
             </html>
         `);
         printWindow.document.close();
 
-        // Wait for content/styles to load then print
-        printWindow.onload = () => {
+        // Wait for styles and fonts to be ready
+        setTimeout(() => {
             printWindow.focus();
             printWindow.print();
-            setTimeout(() => printWindow.close(), 500);
-        };
-
-        // Restore buttons in the original CV modal
-        noprint.forEach(el => { el.style.display = ''; });
+            // Close after a delay to allow the print dialog to finish
+            printWindow.onafterprint = () => printWindow.close();
+            // Fallback for browsers that don't support onafterprint
+            setTimeout(() => {
+                if (!printWindow.closed) printWindow.close();
+            }, 1000);
+        }, 800);
     };
+
 
     return (
         <motion.div
@@ -367,9 +395,20 @@ const CV = ({ onClose }) => {
                         transform: `scale(${Math.min(1, (window.innerWidth - 32) / 794)})`,
                         marginBottom: `calc((${Math.min(1, (window.innerWidth - 32) / 794)} - 1) * 100%)`,
                     }}
-                    className="rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/10"
+                    className="rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/10 relative"
                 >
                     <CVPage cvRef={cvRef} onClose={onClose} onDownload={handleDownload} />
+                </div>
+
+                {/* Mobile-only prominent close button */}
+                <div className="md:hidden flex justify-center mt-8 pb-12">
+                    <button
+                        onClick={onClose}
+                        className="bg-red-500/20 hover:bg-red-500/40 border border-red-500/50 text-white px-8 py-3 rounded-full flex items-center gap-2 transition-all active:scale-95"
+                    >
+                        <X size={18} />
+                        Close CV
+                    </button>
                 </div>
             </motion.div>
         </motion.div>

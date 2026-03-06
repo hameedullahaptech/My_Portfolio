@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ArrowRight, Download, Github, Linkedin, Mail } from 'lucide-react';
+import { ArrowRight, ChevronDown, Download, Github, Linkedin, Mail } from 'lucide-react';
 import { heroData, socialLinks } from '../constants';
 
 const Hero = ({ onOpenCV, onOpenHire }) => {
@@ -194,8 +194,11 @@ const Hero = ({ onOpenCV, onOpenHire }) => {
                         <img
                             src={heroData.image}
                             alt="Developer"
+                            fetchpriority="high"
+                            decoding="async"
                             className="w-full h-full object-cover transform scale-100 group-hover:scale-105 transition-transform duration-700"
                         />
+
 
                         {/* Floating Card */}
                         {/* <motion.div
@@ -217,6 +220,34 @@ const Hero = ({ onOpenCV, onOpenHire }) => {
                     </motion.div>
                 </motion.div>
             </div>
+
+            {/* Scroll Down Indicator */}
+            <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 2, duration: 1 }}
+                className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 group cursor-pointer"
+                onClick={() => {
+                    document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+
+            >
+                <span className="text-[10px] uppercase tracking-[0.3em] text-emerald-500/60 font-bold group-hover:text-emerald-400 transition-colors">
+                    Scroll Down
+                </span>
+                <motion.div
+                    animate={{ y: [0, 8, 0] }}
+                    transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                    }}
+                    className="w-8 h-12 rounded-full border-2 border-emerald-500/20 flex items-start justify-center p-2 group-hover:border-emerald-500/40 transition-colors"
+                >
+                    <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full" />
+                </motion.div>
+                <ChevronDown className="w-4 h-4 text-emerald-500/40 group-hover:text-emerald-400 group-hover:translate-y-1 transition-all" />
+            </motion.div>
         </section>
     );
 };

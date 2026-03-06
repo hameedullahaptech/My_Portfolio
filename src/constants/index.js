@@ -167,7 +167,7 @@ export const aboutData = {
 export const contactData = {
   heading: "Let's Work Together",
   description: "Have a project in mind or just want to say hi? I'm always open to discussing new projects, creative ideas or opportunities to be part of your visions.",
-  email: "hameedullahaptech.com",
+  email: "hameedullahaptech@gmail.com",
   phone: "03178172876",
   location: "Karachi",
   formLabels: {

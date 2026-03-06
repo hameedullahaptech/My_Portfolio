@@ -51,8 +51,11 @@ const About = () => {
                             <img
                                 src={aboutData.image}
                                 alt="Working on code"
+                                loading="lazy"
+                                decoding="async"
                                 className="w-full h-full object-cover aspect-[4/3] hover:scale-105 transition-transform duration-700"
                             />
+
                         </div>
                         {/* Decorative elements */}
                         <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-emerald-600/20 rounded-full blur-2xl" />

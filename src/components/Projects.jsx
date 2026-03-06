@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink, Github, X, ArrowRight, Tag } from 'lucide-react';
+import { ExternalLink, Github, X, ArrowRight, Tag, ArrowLeft } from 'lucide-react';
 import { projects } from '../constants';
 
 const ProjectModal = ({ project, onClose }) => {
@@ -9,14 +9,14 @@ const ProjectModal = ({ project, onClose }) => {
     return (
         <AnimatePresence>
             <motion.div
-                className="fixed inset-0 z-50 flex items-center justify-center p-4"
+                className="fixed inset-0 z-50 flex items-center justify-center p-0 md:p-6"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
             >
                 {/* Backdrop */}
                 <motion.div
-                    className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+                    className="absolute inset-0 bg-black/80 backdrop-blur-md"
                     onClick={onClose}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
@@ -25,87 +25,105 @@ const ProjectModal = ({ project, onClose }) => {
 
                 {/* Modal Box */}
                 <motion.div
-                    className="relative z-10 w-full max-w-2xl rounded-2xl overflow-hidden shadow-2xl border border-white/10"
-                    style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)' }}
-                    initial={{ opacity: 0, scale: 0.85, y: 40 }}
+                    className="relative z-10 w-full max-w-2xl bg-[#0f172a] md:rounded-2xl overflow-hidden shadow-2xl border-white/10 md:border h-full md:h-auto md:max-h-[90vh] flex flex-col"
+                    initial={{ opacity: 0, scale: 1, y: '100%' }}
                     animate={{ opacity: 1, scale: 1, y: 0 }}
-                    exit={{ opacity: 0, scale: 0.85, y: 40 }}
-                    transition={{ type: 'spring', stiffness: 300, damping: 28 }}
+                    exit={{ opacity: 0, scale: 1, y: '100%' }}
+                    transition={{ type: 'spring', damping: 25, stiffness: 200 }}
                 >
-                    {/* Modal Image */}
-                    <div className="relative h-56 overflow-hidden">
-                        <img
-                            src={project.image}
-                            alt={project.title}
-                            className="w-full h-full object-cover"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/30 to-transparent" />
-
-                        {/* Close Button */}
+                    {/* Sticky Header (Mobile & Desktop) */}
+                    <div className="sticky top-0 z-30 bg-[#0f172a]/90 backdrop-blur-lg border-b border-white/10 p-4 flex items-center justify-between">
                         <button
                             onClick={onClose}
-                            className="absolute top-4 right-4 p-2 rounded-full bg-black/50 border border-white/20 text-white hover:bg-emerald-500/30 hover:border-emerald-400 transition-all"
+                            className="flex items-center gap-1.5 text-emerald-400 font-semibold text-sm hover:text-emerald-300 transition-colors"
                         >
-                            <X size={18} />
+                            <ArrowLeft size={18} />
+                            Back
                         </button>
+                        <h3 className="text-white font-bold truncate px-4 text-sm md:text-base">{project.title}</h3>
+                        <button
+                            onClick={onClose}
+                            className="p-1.5 rounded-lg bg-white/5 text-gray-400 hover:text-white transition-colors"
+                        >
+                            <X size={20} />
+                        </button>
+                    </div>
 
-                        {/* Title overlay */}
-                        <div className="absolute bottom-4 left-6">
-                            <h3 className="text-2xl font-bold text-white">{project.title}</h3>
+                    {/* Scrollable Content Area */}
+                    <div className="overflow-y-auto custom-scrollbar flex-1 pb-32">
+                        {/* Modal Image */}
+                        <div className="relative h-56 md:h-72 overflow-hidden">
+                            <img
+                                src={project.image}
+                                alt={project.title}
+                                className="w-full h-full object-cover"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-transparent to-transparent" />
+                        </div>
+
+                        {/* Modal Body */}
+                        <div className="p-6 md:p-8 space-y-8">
+                            {/* Description */}
+                            <div className="space-y-4">
+                                <h4 className="text-sm font-bold text-emerald-400 uppercase tracking-[0.2em]">Project Overview</h4>
+                                <div className="text-gray-300 text-base leading-relaxed space-y-4">
+                                    {project.description.split('\n\n').map((para, i) => (
+                                        <p key={i}>{para}</p>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Tags */}
+                            <div className="space-y-4">
+                                <div className="flex items-center gap-2">
+                                    <Tag size={14} className="text-emerald-400" />
+                                    <span className="text-sm font-bold text-emerald-400 uppercase tracking-[0.2em]">
+                                        Technologies
+                                    </span>
+                                </div>
+                                <div className="flex flex-wrap gap-2">
+                                    {project.tags.map((tag, idx) => (
+                                        <span
+                                            key={idx}
+                                            className="px-4 py-1.5 text-xs font-semibold text-emerald-300 bg-emerald-500/10 border border-emerald-500/20 rounded-xl"
+                                        >
+                                            {tag}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Back Button at Bottom of text */}
+                            <button
+                                onClick={onClose}
+                                className="flex items-center gap-2 py-4 text-emerald-400 font-semibold hover:text-emerald-300 transition-all border-t border-white/5 mt-4"
+                            >
+                                <ArrowLeft size={18} />
+                                Back to All Projects
+                            </button>
                         </div>
                     </div>
 
-                    {/* Modal Body */}
-                    <div className="p-6 space-y-5">
-                        {/* Description */}
-                        <div>
-                            <p className="text-gray-300 text-sm leading-relaxed">
-                                {project.description}
-                            </p>
-                        </div>
-
-                        {/* Tags */}
-                        <div>
-                            <div className="flex items-center gap-2 mb-3">
-                                <Tag size={14} className="text-emerald-400" />
-                                <span className="text-xs font-semibold text-emerald-400 uppercase tracking-widest">
-                                    Technologies
-                                </span>
-                            </div>
-                            <div className="flex flex-wrap gap-2">
-                                {project.tags.map((tag, idx) => (
-                                    <span
-                                        key={idx}
-                                        className="px-3 py-1 text-xs font-medium text-emerald-300 bg-emerald-500/15 border border-emerald-500/30 rounded-full"
-                                    >
-                                        {tag}
-                                    </span>
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Divider */}
-                        <div className="border-t border-white/10" />
-
-                        {/* Action Buttons */}
-                        <div className="flex items-center gap-4 pt-1">
+                    {/* Sticky Footer Action Buttons */}
+                    <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-[#0f172a] via-[#0f172a] to-transparent z-20">
+                        <div className="flex flex-col sm:flex-row items-center gap-3 bg-[#1e293b]/80 backdrop-blur-xl p-3 rounded-2xl border border-white/10 shadow-xl">
                             <a
                                 href={project.liveUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex-1 flex items-center justify-center gap-2 py-3 px-5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-white text-sm font-semibold transition-all hover:shadow-lg hover:shadow-emerald-500/30 hover:-translate-y-0.5"
+                                className="w-full sm:flex-1 flex items-center justify-center gap-2 py-3 px-6 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-white text-sm font-bold transition-all hover:shadow-lg hover:shadow-emerald-500/25 active:scale-95"
                             >
-                                <ExternalLink size={16} />
+                                <ExternalLink size={18} />
                                 Live Demo
                             </a>
                             <a
                                 href={project.githubUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex-1 flex items-center justify-center gap-2 py-3 px-5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 text-white text-sm font-semibold transition-all hover:-translate-y-0.5"
+                                className="w-full sm:flex-1 flex items-center justify-center gap-2 py-3 px-6 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white text-sm font-bold transition-all active:scale-95"
                             >
-                                <Github size={16} />
-                                Source Code
+                                <Github size={18} />
+                                Source
                             </a>
                         </div>
                     </div>
@@ -117,6 +135,17 @@ const ProjectModal = ({ project, onClose }) => {
 
 const Projects = () => {
     const [selectedProject, setSelectedProject] = useState(null);
+
+    useEffect(() => {
+        if (selectedProject) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [selectedProject]);
 
     return (
         <>
@@ -146,18 +175,27 @@ const Projects = () => {
                                 className="group rounded-2xl overflow-hidden bg-white/5 border border-white/10 hover:border-emerald-500/50 transition-all hover:-translate-y-2 flex flex-col"
                             >
                                 {/* Image */}
-                                <div className="relative h-48 overflow-hidden">
+                                <div
+                                    className="relative h-48 overflow-hidden cursor-pointer"
+                                    onClick={() => setSelectedProject(project)}
+                                >
                                     <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors z-10" />
                                     <img
                                         src={project.image}
                                         alt={project.title}
+                                        loading="lazy"
+                                        decoding="async"
                                         className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
                                     />
+
                                 </div>
 
                                 {/* Content */}
                                 <div className="p-6 flex flex-col flex-1">
-                                    <h3 className="text-xl font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors">
+                                    <h3
+                                        className="text-xl font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors cursor-pointer"
+                                        onClick={() => setSelectedProject(project)}
+                                    >
                                         {project.title}
                                     </h3>
 

@@ -1,22 +1,25 @@
-import { useState } from 'react';
+import { useState, lazy, Suspense } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import Layout from './components/Layout';
-import Hero from './components/Hero';
-import Stats from './components/Stats';
-import About from './components/About';
-import Skills from './components/Skills';
-import Projects from './components/Projects';
-import Services from './components/Services';
-import Contact from './components/Contact';
-import CV from './components/CV';
-import HireModal from './components/HireModal';
+import Loading from './components/Loading';
+
+// Lazy load components for performance
+const Hero = lazy(() => import('./components/Hero'));
+const Stats = lazy(() => import('./components/Stats'));
+const About = lazy(() => import('./components/About'));
+const Skills = lazy(() => import('./components/Skills'));
+const Projects = lazy(() => import('./components/Projects'));
+const Services = lazy(() => import('./components/Services'));
+const Contact = lazy(() => import('./components/Contact'));
+const CV = lazy(() => import('./components/CV'));
+const HireModal = lazy(() => import('./components/HireModal'));
 
 function App() {
   const [showCV, setShowCV] = useState(false);
   const [showHire, setShowHire] = useState(false);
 
   return (
-    <>
+    <Suspense fallback={<Loading />}>
       <Layout onOpenHire={() => setShowHire(true)}>
         <Hero
           onOpenCV={() => setShowCV(true)}
@@ -31,11 +34,20 @@ function App() {
       </Layout>
 
       <AnimatePresence>
-        {showCV && <CV onClose={() => setShowCV(false)} />}
-        {showHire && <HireModal isOpen={showHire} onClose={() => setShowHire(false)} />}
+        {showCV && (
+          <Suspense fallback={<Loading />}>
+            <CV onClose={() => setShowCV(false)} />
+          </Suspense>
+        )}
+        {showHire && (
+          <Suspense fallback={null}>
+            <HireModal isOpen={showHire} onClose={() => setShowHire(false)} />
+          </Suspense>
+        )}
       </AnimatePresence>
-    </>
+    </Suspense>
   );
 }
 
 export default App;
+
