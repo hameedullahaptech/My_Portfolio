@@ -1,4 +1,5 @@
-import { socialLinks } from '../constants';
+import { socialLinks, contactData } from '../constants';
+import { openEmail } from '../utils/openEmail';
 
 const Footer = () => {
     return (
@@ -7,10 +8,19 @@ const Footer = () => {
                 <div className="flex flex-col md:flex-row items-center justify-between gap-6">
 
                     <div className="text-center md:text-left">
-                        <h2 className="text-xl font-bold bg-gradient-to-r from-green-400 to-emerald-600 bg-clip-text text-transparent mb-2">
+                        <h2 className="text-xl font-bold bg-gradient-to-r from-green-400 to-emerald-600 bg-clip-text text-transparent mb-1">
                            Hameed ullah
                         </h2>
-                        <p className="text-sm text-gray-500">
+                        <div className="mb-2">
+                            <a 
+                                href={`mailto:${contactData.email}`} 
+                                onClick={(e) => openEmail(contactData.email, e)}
+                                className="text-xs text-gray-400 hover:text-emerald-400 transition-colors"
+                            >
+                                {contactData.email}
+                            </a>
+                        </div>
+                        <p className="text-[10px] text-gray-500 uppercase tracking-widest">
                             © {new Date().getFullYear()} All rights reserved.
                         </p>
                     </div>
@@ -22,6 +32,9 @@ const Footer = () => {
                                 <a
                                     key={index}
                                     href={social.href}
+                                    target={social.name === 'Email' ? undefined : '_blank'}
+                                    rel={social.name !== 'Email' ? 'noopener noreferrer' : undefined}
+                                    onClick={social.name === 'Email' ? (e) => openEmail('hameedullahaptech@gmail.com', e) : undefined}
                                     className="text-gray-400 hover:text-white transition-colors"
                                     aria-label={social.name}
                                 >

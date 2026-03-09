@@ -1,7 +1,6 @@
 import {
   Github,
   Linkedin,
-  MessageCircle,
   Mail,
   Globe,
   Layout,
@@ -16,6 +15,7 @@ import {
   Code2,
   Users
 } from 'lucide-react';
+import WhatsAppIcon from '../utils/WhatsAppIcon';
 
 import heroImage from '../assets/hero-image.jpg';
 import aboutImage from '../assets/about-image.jpg';
@@ -34,10 +34,10 @@ export const navLinks = [
 ];
 
 export const socialLinks = [
-  { name: "GitHub", href: "https://github.com", icon: Github },
-  { name: "LinkedIn", href: "https://www.linkedin.com/in/hameed-ullah-3b4a13343", icon: Linkedin },
-  { name: "WhatsApp", href: "https://wa.me/923178172876", icon: MessageCircle },
-  { name: "Email", href: "https://hameedullahaptech@gmail.com", icon: Mail },
+  { name: "GitHub",    href: "https://github.com/hameedullahaptech",                                          icon: Github,       target: "_blank" },
+  { name: "LinkedIn",  href: "https://www.linkedin.com/in/hameed-ullah-3b4a13343",                            icon: Linkedin,     target: "_blank" },
+  { name: "WhatsApp", href: "https://wa.me/923178172876?text=Hi%20Hameed,%20I%20want%20to%20work%20with%20you!", icon: WhatsAppIcon, target: "_blank" },
+  { name: "Email",     href: "mailto:hameedullahaptech@gmail.com",                                            icon: Mail },
 ];
 
 export const projects = [
@@ -169,6 +169,7 @@ export const contactData = {
   description: "Have a project in mind or just want to say hi? I'm always open to discussing new projects, creative ideas or opportunities to be part of your visions.",
   email: "hameedullahaptech@gmail.com",
   phone: "03178172876",
+  whatsappUrl: "https://wa.me/923178172876",
   location: "Karachi",
   formLabels: {
     name: "Name",

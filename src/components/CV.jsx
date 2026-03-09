@@ -4,6 +4,7 @@ import {
     Mail, Phone, MapPin, Globe, Github, Linkedin,
     Briefcase, GraduationCap, Code2, Cpu, Download, X
 } from 'lucide-react';
+import { openEmail } from '../utils/openEmail';
 
 // ─── CV Data ───────────────────────────────────────────────────────────────
 const cvData = {
@@ -146,7 +147,17 @@ const CVPage = ({ cvRef, onClose, onDownload }) => (
             ].map(({ icon: Icon, val }) => (
                 <span key={val} className="flex items-center gap-1.5">
                     <Icon size={11} />
-                    {val}
+                    {val === cvData.email ? (
+                        <a 
+                            href={`mailto:${val}`} 
+                            onClick={(e) => openEmail(val, e)}
+                            className="hover:text-white transition-colors underline underline-offset-2"
+                        >
+                            {val}
+                        </a>
+                    ) : (
+                        val
+                    )}
                 </span>
             ))}
         </div>
@@ -278,7 +289,15 @@ const CVPage = ({ cvRef, onClose, onDownload }) => (
         {/* ── FOOTER ── */}
         <div className="bg-[#0f172a] px-10 py-3 text-center">
             <p className="text-gray-400 text-[10px]">
-                References available upon request &nbsp;·&nbsp; {cvData.email} &nbsp;·&nbsp; {cvData.website}
+                References available upon request &nbsp;·&nbsp; 
+                <a 
+                    href={`mailto:${cvData.email}`} 
+                    onClick={(e) => openEmail(cvData.email, e)}
+                    className="hover:text-emerald-400 transition-colors"
+                >
+                    {cvData.email}
+                </a> 
+                &nbsp;·&nbsp; {cvData.website}
             </p>
         </div>
     </div>

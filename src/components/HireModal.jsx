@@ -1,6 +1,8 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Mail, MessageCircle, Linkedin, ArrowUpRight } from 'lucide-react';
+import { X, Mail, Linkedin, ArrowUpRight } from 'lucide-react';
 import { useEffect } from 'react';
+import { openEmail } from '../utils/openEmail';
+import WhatsAppIcon from '../utils/WhatsAppIcon';
 
 const contacts = [
     {
@@ -13,10 +15,11 @@ const contacts = [
     },
     {
         id: 'whatsapp',
-        icon: MessageCircle,
+        icon: WhatsAppIcon,
         label: 'WhatsApp',
         sub: '+92 317 8172876',
-        href: 'https://wa.me/923178172876?text=Hi%20Hameed%2C%20I%20want%20to%20hire%20you!',
+        href: 'https://wa.me/923178172876?text=Hi%20Hameed,%20I%20want%20to%20work%20with%20you!',
+        target: '_blank',
         accent: '#10b981',
     },
     {
@@ -25,6 +28,7 @@ const contacts = [
         label: 'LinkedIn',
         sub: 'hameed-ullah-3b4a13343',
         href: 'https://www.linkedin.com/in/hameed-ullah-3b4a13343',
+        target: '_blank',
         accent: '#10b981',
     },
 ];
@@ -79,14 +83,15 @@ const HireModal = ({ isOpen, onClose }) => {
 
                             <div className="space-y-3">
                                 {contacts.map((c) => (
-                                    <a
-                                        key={c.id}
-                                        href={c.href}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="flex items-center justify-between p-4 rounded-xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] hover:border-emerald-500/50 transition-all group"
-                                        style={{ textDecoration: 'none' }}
-                                    >
+                                <a
+                                    key={c.id}
+                                    href={c.href}
+                                    target={c.id === 'email' ? undefined : c.target}
+                                    rel={c.target === '_blank' ? 'noopener noreferrer' : undefined}
+                                    onClick={c.id === 'email' ? (e) => openEmail('hameedullahaptech@gmail.com', e) : undefined}
+                                    className="flex items-center justify-between p-4 rounded-xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] hover:border-emerald-500/50 transition-all group"
+                                    style={{ textDecoration: 'none' }}
+                                >
                                         <div className="flex items-center gap-4">
                                             <div className="text-emerald-500">
                                                 <c.icon size={22} />

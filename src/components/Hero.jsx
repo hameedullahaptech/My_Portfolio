@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, ChevronDown, Download, Github, Linkedin, Mail } from 'lucide-react';
 import { heroData, socialLinks } from '../constants';
+import { openEmail } from '../utils/openEmail';
 
 const Hero = ({ onOpenCV, onOpenHire }) => {
     // Stagger container for the main text block
@@ -165,6 +166,9 @@ const Hero = ({ onOpenCV, onOpenHire }) => {
                                 <a
                                     key={index}
                                     href={social.href}
+                                    target={social.name === 'Email' ? undefined : '_blank'}
+                                    rel={social.name !== 'Email' ? 'noopener noreferrer' : undefined}
+                                    onClick={social.name === 'Email' ? (e) => openEmail('hameedullahaptech@gmail.com', e) : undefined}
                                     className="text-gray-400 hover:text-emerald-400 transition-colors transform hover:scale-110"
                                 >
                                     <Icon size={24} />
