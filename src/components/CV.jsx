@@ -308,85 +308,50 @@ const CV = ({ onClose }) => {
     const cvRef = useRef(null);
 
     const handleDownload = () => {
+        // Create a print-only style that hides everything except the CV
+        const style = document.createElement('style');
+        style.id = 'cv-print-style';
+        style.innerHTML = `
+            @media print {
+                @page { size: A4; margin: 0; }
+                body > * { display: none !important; }
+                #cv-print-portal { display: block !important; position: fixed; top: 0; left: 0; width: 100%; z-index: 999999; }
+                #cv-print-area { 
+                    width: 210mm !important; 
+                    margin: 0 auto !important;
+                    box-shadow: none !important;
+                    transform: none !important;
+                }
+                .no-print { display: none !important; }
+                * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+            }
+        `;
+
+        // Clone the CV and put it into a print portal div
         const cvEl = document.getElementById('cv-print-area');
         if (!cvEl) return;
 
-        // Collect current styles
-        const styleLinks = Array.from(document.querySelectorAll('link[rel="stylesheet"]'))
-            .map(link => `<link rel="stylesheet" href="${link.href}">`)
-            .join('');
-        const inlineStyles = Array.from(document.querySelectorAll('style'))
-            .map(s => `<style>${s.innerHTML}</style>`)
-            .join('');
+        const portal = document.createElement('div');
+        portal.id = 'cv-print-portal';
+        portal.style.display = 'none';
+        portal.innerHTML = cvEl.outerHTML;
+        document.body.appendChild(portal);
+        document.head.appendChild(style);
 
-        const printWindow = window.open('', '_blank', 'width=1000,height=800');
-        if (!printWindow) {
-            alert("Please allow popups to download the CV.");
-            return;
-        }
-
-        printWindow.document.write(`
-            <!DOCTYPE html>
-            <html>
-            <head>
-                <meta charset="UTF-8"/>
-                <title>${cvData.name} — CV</title>
-                ${styleLinks}
-                ${inlineStyles}
-                <style>
-                    /* Force Print Settings */
-                    @page { 
-                        size: A4; 
-                        margin: 0; 
-                    }
-                    body { 
-                        margin: 0; 
-                        padding: 0; 
-                        background: white !important;
-                        -webkit-print-color-adjust: exact !important; 
-                        print-color-adjust: exact !important;
-                    }
-                    #cv-print-area { 
-                        width: 210mm !important; 
-                        margin: 0 auto !important;
-                        box-shadow: none !important;
-                        transform: none !important;
-                        display: block !important;
-                    }
-                    .no-print { display: none !important; }
-                    
-                    /* Typography & Colors */
-                    * { 
-                        -webkit-print-color-adjust: exact !important; 
-                        print-color-adjust: exact !important; 
-                    }
-                </style>
-            </head>
-            <body>
-                <div id="cv-outer-wrapper">
-                    ${cvEl.innerHTML}
-                </div>
-            </body>
-            <script>
-                // Map the original ID to the wrapper if needed, but innerHTML is safer for clones
-                document.body.firstElementChild.id = "cv-print-area";
-                document.body.firstElementChild.className = "${cvEl.className}";
-            </script>
-            </html>
-        `);
-        printWindow.document.close();
-
-        // Wait for styles and fonts to be ready
+        // Trigger print
         setTimeout(() => {
-            printWindow.focus();
-            printWindow.print();
-            // Close after a delay to allow the print dialog to finish
-            printWindow.onafterprint = () => printWindow.close();
-            // Fallback for browsers that don't support onafterprint
-            setTimeout(() => {
-                if (!printWindow.closed) printWindow.close();
-            }, 1000);
-        }, 800);
+            window.print();
+            // Cleanup after print dialog closes
+            const cleanup = () => {
+                const s = document.getElementById('cv-print-style');
+                const p = document.getElementById('cv-print-portal');
+                if (s) s.remove();
+                if (p) p.remove();
+            };
+            window.addEventListener('afterprint', cleanup, { once: true });
+            // Fallback cleanup in case afterprint doesn't fire (e.g. iOS)
+            setTimeout(cleanup, 3000);
+        }, 200);
     };
 
 
