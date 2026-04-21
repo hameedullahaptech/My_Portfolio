@@ -18,7 +18,7 @@ import {
 import WhatsAppIcon from '../utils/WhatsAppIcon';
 
 import heroImage from '../assets/hero-image.jpg';
-import aboutImage from '../assets/about-image.jpg';
+import aboutImage from '../assets/hero-image.jpg';
 import project1 from '../assets/image3.png';
 import project2 from '../assets/image.png';
 import project3 from '../assets/image1.png';
@@ -34,10 +34,10 @@ export const navLinks = [
 ];
 
 export const socialLinks = [
-  { name: "GitHub",    href: "https://github.com/hameedullahaptech",                                          icon: Github,       target: "_blank" },
-  { name: "LinkedIn",  href: "https://www.linkedin.com/in/hameed-ullah-3b4a13343",                            icon: Linkedin,     target: "_blank" },
+  { name: "GitHub", href: "https://github.com/hameedullahaptech", icon: Github, target: "_blank" },
+  { name: "LinkedIn", href: "https://www.linkedin.com/in/hameed-ullah-3b4a13343", icon: Linkedin, target: "_blank" },
   { name: "WhatsApp", href: "https://wa.me/923178172876?text=Hi%20Hameed,%20I%20want%20to%20work%20with%20you!", icon: WhatsAppIcon, target: "_blank" },
-  { name: "Email",     href: "mailto:hameedullahaptech@gmail.com",                                            icon: Mail },
+  { name: "Email", href: "mailto:hameedullahaptech@gmail.com", icon: Mail },
 ];
 
 export const projects = [
@@ -45,7 +45,7 @@ export const projects = [
     title: "Hotel Management System",
     description: "The Hotel Management System is a web-based application designed to streamline and automate hotel operations. The system allows admins to manage rooms, reservations, customers, staff, and services, while providing users with an easy way to search rooms, make bookings, and view reservation details.\n\nThe project includes role-based access, real-time room availability, booking management, and secure data handling, ensuring efficient hotel administration and a smooth user experience. This system helps reduce manual work and improves overall operational efficiency in the hospitality industry.",
     image: project1,
-    tags: ["React", "Tailwind", "Recharts", "Node.js"],
+    tags: ["React", "Tailwind", "MongoDB", "Node.js"],
     liveUrl: "https://frontend-seven-roan-54.vercel.app/",
     githubUrl: "https://github.com/hameedullahaptech/Hotel_Management_Project.git"
   },
@@ -53,7 +53,7 @@ export const projects = [
     title: "Fitness Tracker",
     description: "A responsive Fitness Tracker Website designed to help users monitor their daily health activities. The system allows users to log meals, track calories, manage workout routines, and view progress in a simple and user-friendly interface. Built with a modern UI, secure authentication, and database integration, the website ensures smooth performance across all devices.\n\nKey Features:\n• User registration & login\n• Meal and calorie tracking\n• Workout & activity logging\n• Responsive design\n• Secure database-driven system",
     image: project2,
-    tags: ["React.js", "Tailwind", ".MongoDB", "Next.js"],
+    tags: ["React.js", "Tailwind", "MongoDB", "Node.js"],
     liveUrl: "https://fitness-hameed.vercel.app/",
     githubUrl: "https://github.com/hameedullahaptech/Fitness-Tracking.git"
   },
@@ -61,7 +61,7 @@ export const projects = [
     title: "E-Commerce Web Application",
     description: "An E-Commerce Web Application is a complete online shopping platform that allows users to browse products, add items to the cart, and securely place orders. Through the admin panel, products, categories, pricing, and customer orders are efficiently managed.\n\nThe system features a modern user interface, secure checkout process, and order tracking, providing users with a smooth, reliable, and scalable online shopping experience.",
     image: project3,
-    tags: ["React.js", "Bootstrap", "SQL", "Asp.Net"],
+    tags: ["React.js", "Bootstrap", "SQL", ".Net"],
     liveUrl: "http://ecommercehameed.runasp.net/",
     githubUrl: "https://github.com/hameedullahaptech/Ecommerce.git"
   },
@@ -79,7 +79,7 @@ export const projects = [
 export const services = [
   {
     title: "Web Development",
-    description: "Building fast, SEO-friendly, and scalable websites using modern technologies like React and Next.js.",
+    description: "Building fast, SEO-friendly, and scalable websites using modern technologies like React.js.",
     icon: Globe
   },
   {
@@ -113,7 +113,7 @@ export const skillCategories = [
   {
     title: "Frontend",
     icon: Layout,
-    skills: ["React", "Next.js", "Tailwind CSS", "Angular"]
+    skills: ["React", "Tailwind CSS", "Angular"]
   },
   {
     title: "Backend",
@@ -133,7 +133,7 @@ export const skillCategories = [
 ];
 
 export const stats = [
-  { label: "Years Experience", value: "2+", icon: Briefcase },
+  { label: "Years Experience", value: "3+", icon: Briefcase },
   { label: "Projects Completed", value: "15+", icon: Award },
   { label: "Technologies", value: "9+", icon: Code2 },
   { label: "Client Satisfaction", value: "98%", icon: Users },
@@ -152,7 +152,7 @@ export const heroData = {
   badgeText: "Available for freelance work",
   ctaPrimary: "Contact Me",
   ctaSecondary: "Download CV",
-  yearsExperience: "2+",
+  yearsExperience: "3+",
   experienceText: "Years Experience",
   experienceSubText: "Building Digital Products",
   image: heroImage
@@ -160,7 +160,7 @@ export const heroData = {
 
 export const aboutData = {
   heading: "Turning complex problems into simple, beautiful code.",
-  description: "I am a results-driven Full Stack Developer with over 2 years of experience in building high-performance digital products. My expertise spans across the entire development lifecycle—from crafting pixel-perfect, responsive UIs with React.js and Tailwind CSS, to designing scalable backend architectures using Node.js and Express.js. \n\nWith a strong foundation in both SQL and NoSQL databases (MongoDB, MySQL, SQL Server) and hands-on experience in Cloud & DevOps (AWS, Docker, Git), I help businesses transform their ideas into scalable, secure, and performant web platforms. I focus on clean code, optimized performance, and delivering high-quality user interfaces.",
+  description: "I am a results-driven Full Stack Developer with over 3 years of experience in building high-performance digital products. My expertise spans across the entire development lifecycle—from crafting pixel-perfect, responsive UIs with React.js and Tailwind CSS, to designing scalable backend architectures using Node.js and Express.js. \n\nWith a strong foundation in both SQL and NoSQL databases (MongoDB, MySQL, SQL Server) and hands-on experience in Cloud & DevOps (AWS, Docker, Git), I help businesses transform their ideas into scalable, secure, and performant web platforms. I focus on clean code, optimized performance, and delivering high-quality user interfaces.",
   image: aboutImage
 };
 

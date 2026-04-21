@@ -49,7 +49,7 @@ const cvData = {
         },
     ],
     skills: {
-        Frontend: ["React.js", "Next.js", "Angular", "Tailwind CSS", "HTML5/CSS3", "JavaScript (ES6+)"],
+        Frontend: ["React.js", "Angular", "Tailwind CSS", "HTML5/CSS3", "JavaScript (ES6+)"],
         Backend: ["Node.js", "Express.js", "REST APIs", "Python"],
         Database: ["MongoDB", "SQL Server", "MySQL"],
         "DevOps & Tools": ["Git & GitHub", "Docker", "AWS", "Vercel", "Postman"],
@@ -63,7 +63,7 @@ const cvData = {
         },
         {
             name: "Fitness Tracking App",
-            tech: "React.js, MongoDB, Next.js, Tailwind",
+            tech: "React.js, MongoDB, Tailwind",
             desc: "Full-featured social fitness platform with workout tracking, friend interactions, and feeds.",
             url: "fitness-hameed.vercel.app",
         },
@@ -148,8 +148,8 @@ const CVPage = ({ cvRef, onClose, onDownload }) => (
                 <span key={val} className="flex items-center gap-1.5">
                     <Icon size={11} />
                     {val === cvData.email ? (
-                        <a 
-                            href={`mailto:${val}`} 
+                        <a
+                            href={`mailto:${val}`}
                             onClick={(e) => openEmail(val, e)}
                             className="hover:text-white transition-colors underline underline-offset-2"
                         >
@@ -289,14 +289,14 @@ const CVPage = ({ cvRef, onClose, onDownload }) => (
         {/* ── FOOTER ── */}
         <div className="bg-[#0f172a] px-10 py-3 text-center">
             <p className="text-gray-400 text-[10px]">
-                References available upon request &nbsp;·&nbsp; 
-                <a 
-                    href={`mailto:${cvData.email}`} 
+                References available upon request &nbsp;·&nbsp;
+                <a
+                    href={`mailto:${cvData.email}`}
                     onClick={(e) => openEmail(cvData.email, e)}
                     className="hover:text-emerald-400 transition-colors"
                 >
                     {cvData.email}
-                </a> 
+                </a>
                 &nbsp;·&nbsp; {cvData.website}
             </p>
         </div>
